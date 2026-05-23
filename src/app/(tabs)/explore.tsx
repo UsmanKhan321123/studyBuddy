@@ -5,7 +5,7 @@ export default function Explore(){
     return(
         <View>
 
-            <Text></Text>
+            <Text>This is our explore screen</Text>
 
         </View>
     )

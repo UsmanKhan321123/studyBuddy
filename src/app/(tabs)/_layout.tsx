@@ -21,6 +21,7 @@ export default function TabsLayout() {
         <NativeTabs.Trigger.Icon
           sf="message"
           md="chat"
+          selectedColor={"#6C5CE7"}
         ></NativeTabs.Trigger.Icon>
       </NativeTabs.Trigger>
 
@@ -29,16 +30,20 @@ export default function TabsLayout() {
         <NativeTabs.Trigger.Icon
           sf="safari"
           md="explore"
+          selectedColor={"#6C5CE7"}
         ></NativeTabs.Trigger.Icon>
       </NativeTabs.Trigger>
-
       <NativeTabs.Trigger name="profile">
         <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
           sf="person.fill"
           md="person"
+          selectedColor={"#6C5CE7"}
         ></NativeTabs.Trigger.Icon>
       </NativeTabs.Trigger>
+      {/* <NativeTabs.Trigger name="search" role="search"> // name main file ka name jata hai jahan edirecr krwaty hain
+        <NativeTabs.Trigger.Label  >Search</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger> */}
     </NativeTabs>
   );
 }
