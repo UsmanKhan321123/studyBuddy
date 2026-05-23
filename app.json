@@ -21,7 +21,7 @@
       "package": "com.usmankhan321123.studybuddy55"
     },
     "web": {
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/images/favicon.png",
       "bundler": "metro"
     },

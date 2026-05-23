@@ -4,6 +4,8 @@ import { ClerkProvider } from "@clerk/expo";
 import { tokenCache } from '@clerk/expo/token-cache'
 import * as WebBrowser from "expo-web-browser";
 import * as Sentry from '@sentry/react-native';
+import {GestureHandlerRootView} from "react-native-gesture-handler"
+import {StyleSheet} from "react-native"
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -34,10 +36,18 @@ Sentry.init({
 export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <GestureHandlerRootView style={styles.container}>
       <Stack screenOptions={{headerShown:false}}>
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
       </Stack>
+      </GestureHandlerRootView>
     </ClerkProvider>
   );
 }
+
+let styles = StyleSheet.create({
+  container:{
+    flex:1
+  }
+})  
