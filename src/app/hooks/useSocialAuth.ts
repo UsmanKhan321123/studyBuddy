@@ -1,34 +1,79 @@
 import { useSSO } from "@clerk/expo";
-import { useState } from "react";
-import { Alert } from "react-native";
+import * as AuthSession from "expo-auth-session";
+import { router } from "expo-router";
+import * as WebBrowser from "expo-web-browser";
+import { useEffect, useState } from "react";
+import { Alert, Platform } from "react-native";
+
+const APP_SCHEME = "studybuddysdk55";
+const nativeRedirectUrl = AuthSession.makeRedirectUri({
+  scheme: APP_SCHEME,
+  path: "/sso-callback",
+});
+type SocialStrategy = "oauth_google" | "oauth_github";
 
 const useSocialAuth = () => {
-  const [loadingStrategy, setLoadingStrategy] = useState<String | null>(null);
+  const [loadingStrategy, setLoadingStrategy] = useState<SocialStrategy | null>(null);
   const { startSSOFlow } = useSSO();
-  
-  let handleSocialAuth = async (startegy: "oauth_google" | "oauth_github") => {
+
+  useEffect(() => {
+    if (Platform.OS !== "android") return;
+
+    void WebBrowser.warmUpAsync();
+
+    return () => {
+      void WebBrowser.coolDownAsync();
+    };
+  }, []);
+
+  const handleSocialAuth = async (strategy: SocialStrategy) => {
     if (loadingStrategy) return; // guard against concurrent flows
-    setLoadingStrategy(startegy);
+    setLoadingStrategy(strategy);
+
+    const provider = strategy === "oauth_google" ? "Google" : "GitHub";
+
     try {
-      let { createdSessionId, setActive } = await startSSOFlow({ strategy });
+      const { createdSessionId, setActive, signIn, signUp, authSessionResult } =
+        await startSSOFlow({
+          strategy,
+          redirectUrl: Platform.OS === "web" ? undefined : nativeRedirectUrl,
+        });
+
       if (!createdSessionId || !setActive) {
-        const provider = strategy === "oauth_google" ? "Google" : "Github";
+        console.warn("Social auth did not create a session", {
+          provider,
+          authSessionResult,
+          signInStatus: signIn?.status,
+          signUpStatus: signUp?.status,
+        });
 
         Alert.alert(
           "Sign-In Incomplete",
-          `${provider} Sign-In did not complete. Please try again.`,
+          `${provider} sign-in did not complete. Please try again.`,
         );
 
         return;
       }
 
-      await setActive({ session: createdSessionId });
-    } catch (error) {}
-    finally {
-        setLoadingStrategy(null)
+      await setActive({
+        session: createdSessionId,
+        navigate: async () => {
+          router.replace("/(tabs)");
+        },
+      });
+    } catch (error) {
+      console.error(`${provider} sign-in failed`, error);
+
+      Alert.alert(
+        "Sign-In Failed",
+        `${provider} sign-in could not be started. Please check your OAuth setup and try again.`,
+      );
+    } finally {
+      setLoadingStrategy(null);
     }
   };
-  return {handleSocialAuth, loadingStrategy};
+
+  return { handleSocialAuth, loadingStrategy };
 };
 
 export default useSocialAuth;
