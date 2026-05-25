@@ -45,7 +45,8 @@
           "project": "react-native",
           "organization": "uk732161"
         }
-      ]
+      ],
+      "@sentry/react-native"
     ],
     "experiments": {
       "typedRoutes": true,

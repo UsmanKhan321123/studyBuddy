@@ -1,5 +1,4 @@
 import { Stack } from "expo-router";
-import "../../global.css";
 import { ClerkProvider } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
 import * as WebBrowser from "expo-web-browser";
@@ -7,7 +6,7 @@ import * as Sentry from "@sentry/react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { AppProvider } from "./contexts/AppProvider";
-import ChatWrapper from "./components/chatWrapper";
+import ChatWrapper from "./components/ChatWrapper";
 
 WebBrowser.maybeCompleteAuthSession();
 
