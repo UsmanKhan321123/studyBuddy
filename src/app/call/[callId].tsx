@@ -1,4 +1,4 @@
-import { COLORS } from "@/lib/theme";
+import { COLORS } from "../../lib/theme";
 import { Ionicons } from "@expo/vector-icons";
 import {
   Call,
