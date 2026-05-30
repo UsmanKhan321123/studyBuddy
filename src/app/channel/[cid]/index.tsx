@@ -10,6 +10,7 @@ import { useLayoutEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Channel, MessageInput, MessageList, useChatContext } from "stream-chat-expo";
 
+
 const ChannelScreen = () => {
   const { channel, setThread } = useAppContext();
   const { client } = useChatContext();
@@ -70,7 +71,7 @@ const ChannelScreen = () => {
         <TouchableOpacity
           onPress={() => {
             router.push({
-              pathname: "/call/[callId]",
+              pathname: "../call/[callId]",
               params: { callId: channel?.id! },
             });
           }}

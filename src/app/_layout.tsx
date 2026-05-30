@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { AppProvider } from "./contexts/AppProvider";
 import ChatWrapper from "./components/ChatWrapper";
+import VideoProvider from "./components/VideoProvider";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -40,12 +41,14 @@ export default function RootLayout() {
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <GestureHandlerRootView style={styles.container}>
         <ChatWrapper>
-          <AppProvider>
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="(auth)" />
-              <Stack.Screen name="(tabs)" />
-            </Stack>
-          </AppProvider>
+          <VideoProvider>
+            <AppProvider>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(auth)" />
+                <Stack.Screen name="(tabs)" />
+              </Stack>
+            </AppProvider>
+          </VideoProvider>
         </ChatWrapper>
       </GestureHandlerRootView>
     </ClerkProvider>
