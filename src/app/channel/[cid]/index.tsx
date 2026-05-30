@@ -8,7 +8,8 @@ import { Image } from "expo-image";
 import { useNavigation, useRouter } from "expo-router";
 import { useLayoutEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { Channel, MessageInput, MessageList, useChatContext } from "stream-chat-expo";
+import { Channel,  MessageComposer,MessageList, useChatContext } from "stream-chat-expo";
+
 
 
 const ChannelScreen = () => {
@@ -89,13 +90,6 @@ const ChannelScreen = () => {
       <Channel
         channel={channel}
         keyboardVerticalOffset={headerHeight}
-        EmptyStateIndicator={() => (
-          <EmptyState
-            icon="book-outline"
-            title="No messages yet"
-            subtitle="Start a study conversation!"
-          />
-        )}
       >
         <MessageList
           onThreadSelect={(thread) => {
@@ -105,7 +99,7 @@ const ChannelScreen = () => {
         />
 
         <View className="pb-5 bg-surface">
-          <MessageInput audioRecordingEnabled />
+          <MessageComposer  />
         </View>
       </Channel>
     </View>
