@@ -3,12 +3,16 @@
     "name": "studyBuddy@sdk55",
     "slug": "studybuddy55",
     "version": "1.0.0",
+    "platforms": [
+      "android"
+    ],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "studybuddysdk55",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bitcode": false
     },
     "android": {
       "adaptiveIcon": {
@@ -18,7 +22,21 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.usmankhan321123.studybuddy55"
+      "package": "com.usmankhan321123.studybuddy55",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.WAKE_LOCK",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.CAMERA",
+        "android.permission.INTERNET",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ]
     },
     "web": {
       "output": "server",
@@ -40,19 +58,18 @@
           "microphonePermission": "$(PRODUCT_NAME) would like to use your microphone for voice recording."
         }
       ],
-       [
-      "expo-build-properties",
-      {
-        "android": {
-          "minSdkVersion": 24
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24
+          }
         }
-      }
-    ],
-    "@stream-io/video-react-native-sdk",
-     [
+      ],
+      "@stream-io/video-react-native-sdk",
+      [
         "@config-plugins/react-native-webrtc",
         {
-          // add your explanations for camera and microphone
           "cameraPermission": "$(PRODUCT_NAME) requires camera access in order to capture and transmit video",
           "microphonePermission": "$(PRODUCT_NAME) requires microphone access in order to capture and transmit audio"
         }
@@ -77,7 +94,10 @@
         }
       ],
       "@sentry/react-native",
-      "expo-audio"
+      "expo-audio",
+      "expo-asset",
+      "expo-sharing",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -86,7 +106,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "0e0abc56-5489-4a63-8e6b-947e095213fd"
+        "projectId": "ff97adfd-fe25-4022-9eed-98ac02e45b78"
       }
     },
     "owner": "usmankhan321123"

@@ -93,8 +93,13 @@ const ChannelScreen = () => {
       >
         <MessageList
           onThreadSelect={(thread) => {
+            if (!thread?.cid) return;
+
             setThread(thread);
-            router.push(`/channel/${channel.cid}/thread/${thread?.cid}`);
+            router.push({
+              pathname: "/channel/[cid]/thread/[threadCid]",
+              params: { cid: channel.cid, threadCid: thread.cid },
+            });
           }}
         />
 

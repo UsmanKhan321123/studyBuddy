@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/expo";
-import type {UserResource} from "@clerk/types"
+import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { FullScreenLoader } from "./FullScreenLoader";
 import {Chat,OverlayProvider,useCreateChatClient} from "stream-chat-expo"
@@ -7,7 +7,12 @@ import { studyBuddyTheme } from "@/lib/theme";
 
 const STREAM_API_KEY = process.env.EXPO_PUBLIC_STREAM_API_KEY!;
 
-const syncUserToStream = async(user:UserResource)=>{
+type ClerkUser = NonNullable<ReturnType<typeof useUser>["user"]>;
+
+const getDisplayName = (user: ClerkUser) =>
+    user.fullName ?? user.username ?? user.emailAddresses[0]?.emailAddress.split("@")[0] ?? user.id;
+
+const syncUserToStream = async(user:ClerkUser)=>{
 
     try {
         await fetch("/api/sync-user",{
@@ -15,7 +20,7 @@ const syncUserToStream = async(user:UserResource)=>{
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify({
                 userId:user.id,
-                name:user.fullName ?? user.username ?? user.emailAddresses[0].emailAddress.split("@")[0],
+                name:getDisplayName(user),
                 image:user.imageUrl,
             })
         })  
@@ -24,7 +29,7 @@ const syncUserToStream = async(user:UserResource)=>{
     }
 }
 
- function ChatClient({children,user}:{children:React.ReactNode,user:UserResource}){
+ function ChatClient({children,user}:{children:ReactNode,user:ClerkUser}){
     const syncedRef = useRef(false)
     useEffect(()=>{
         if(!syncedRef.current){
@@ -48,7 +53,7 @@ const syncUserToStream = async(user:UserResource)=>{
         apiKey:STREAM_API_KEY,
         userData:{
             id:user.id,
-             name:user.fullName ?? user.username ?? user.emailAddresses[0].emailAddress.split("@")[0],
+             name:getDisplayName(user),
              image:user.imageUrl,
         },
         tokenOrProvider:tokenProvider
@@ -63,7 +68,7 @@ const syncUserToStream = async(user:UserResource)=>{
     </OverlayProvider>
 }
 
-export default function ChatWrapper({children}:{children:React.ReactNode}){
+export default function ChatWrapper({children}:{children:ReactNode}){
 
 
     const {user,isLoaded} = useUser()

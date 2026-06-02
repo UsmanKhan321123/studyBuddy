@@ -19,13 +19,7 @@ const ThreadScreen = () => {
         keyboardVerticalOffset={headerHeight}
         thread={thread}
         threadList
-        EmptyStateIndicator={() => (
-          <EmptyState
-            icon="book-outline"
-            title="No messages yet"
-            subtitle="Start a study conversation!"
-          />
-        )}
+        
       >
         <View className="flex-1 justify-start">
           <Thread onThreadDismount={() => setThread(null)} />

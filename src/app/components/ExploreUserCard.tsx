@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 16,
     fontWeight: "600",
-    color: COLORS.surfaceLight,
+    color: "white",
   },
 
   status: {

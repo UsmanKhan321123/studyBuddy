@@ -39,13 +39,6 @@ export const COLORS = {
 };
 
  export const studyBuddyTheme: DeepPartial<Theme> = {
-  colors: {
-    targetedMessageBackground: "transparent",
-    grey_dark: COLORS.text,
-    accent_blue: COLORS.primary,
-    white: COLORS.text,
-    black: COLORS.background,
-  },
   audioAttachment: {
     container: {
       backgroundColor: COLORS.surfaceDark,
@@ -119,7 +112,7 @@ export const COLORS = {
       },
     },
   },
-  channelListMessenger: {
+  channelListView: {
     flatList: {
       backgroundColor: COLORS.background,
     },
@@ -144,8 +137,12 @@ export const COLORS = {
     },
   },
   channelListSkeleton: {
-    background: { backgroundColor: COLORS.surfaceLight },
-    maskFillColor: COLORS.background,
+    container: { backgroundColor: COLORS.background },
+    content: { backgroundColor: COLORS.surfaceLight },
+    title: { backgroundColor: COLORS.surfaceLight },
+    subtitle: { backgroundColor: COLORS.surfaceLight },
+    avatar: { backgroundColor: COLORS.surfaceLight },
+    badge: { backgroundColor: COLORS.primary },
   },
   channelPreview: {
     container: {
@@ -165,7 +162,6 @@ export const COLORS = {
   },
   messageList: {
     scrollToBottomButton: {
-      chevronColor: COLORS.text,
       container: {
         backgroundColor: COLORS.surface,
         borderColor: COLORS.border,
@@ -191,7 +187,7 @@ export const COLORS = {
     },
   },
 
-  messageInput: {
+  messageComposer: {
     container: {
       backgroundColor: COLORS.surface,
       borderTopColor: COLORS.border,
@@ -209,9 +205,6 @@ export const COLORS = {
       backgroundColor: COLORS.surfaceDark,
       borderRadius: 8,
       borderWidth: 0,
-    },
-    autoCompleteInputContainer: {
-      backgroundColor: COLORS.surface,
     },
     suggestionsListContainer: {
       container: {
@@ -274,8 +267,8 @@ export const COLORS = {
       },
     },
   },
-  messageSimple: {
-    avatarWrapper: {
+  messageItemView: {
+    authorWrapper: {
       container: {
         marginRight: 8,
       },
@@ -302,18 +295,6 @@ export const COLORS = {
         borderColor: COLORS.incomingBubble,
         borderRadius: 8,
       },
-      deletedMetaText: {
-        display: "none",
-      },
-      deletedContainerInner: {
-        backgroundColor: COLORS.surfaceDark,
-        borderColor: COLORS.surfaceDark,
-      },
-      deletedText: {
-        text: {
-          color: COLORS.textMuted,
-        },
-      },
       markdown: {
         em: {
           color: COLORS.textMuted,
@@ -322,11 +303,17 @@ export const COLORS = {
           color: COLORS.text,
         },
       },
-      metaContainer: {
-        backgroundColor: "transparent",
-      },
       metaText: {
         color: COLORS.textSubtle,
+      },
+    },
+    deleted: {
+      containerInner: {
+        backgroundColor: COLORS.surfaceDark,
+        borderColor: COLORS.surfaceDark,
+      },
+      deletedText: {
+        color: COLORS.textMuted,
       },
     },
 
@@ -341,9 +328,6 @@ export const COLORS = {
         width: vw(80),
         backgroundColor: COLORS.surface,
         borderColor: COLORS.border,
-      },
-      authorNameContainer: {
-        display: "none",
       },
       cover: {
         marginHorizontal: 0,
@@ -372,23 +356,14 @@ export const COLORS = {
         backgroundColor: COLORS.surface,
         borderRadius: 8,
       },
-      leftCurve: {
-        borderColor: COLORS.primary,
-      },
       messageRepliesText: {
         padding: 4,
         color: COLORS.primary,
-      },
-      rightCurve: {
-        borderColor: COLORS.primary,
       },
     },
     status: {
       timeIcon: {
         pathFill: COLORS.textSubtle,
-      },
-      readByCount: {
-        color: COLORS.textSubtle,
       },
       checkAllIcon: {
         pathFill: COLORS.primary,
@@ -412,11 +387,11 @@ export const COLORS = {
       backgroundColor: COLORS.surfaceDark,
       borderColor: COLORS.border,
     },
-    textContainer: {
-      backgroundColor: COLORS.surfaceDark,
-    },
-    markdownStyles: {
-      text: {
+    messagePreview: {
+      container: {
+        backgroundColor: COLORS.surfaceDark,
+      },
+      subtitle: {
         color: COLORS.textMuted,
       },
     },
@@ -455,11 +430,9 @@ export const COLORS = {
         progressBar: {
           backgroundColor: COLORS.border,
         },
-        progressBarEmptyFill: COLORS.border,
-        progressBarVotedFill: COLORS.primary,
-        progressBarWinnerFill: COLORS.primaryLight,
-        voteButtonActive: COLORS.primary,
-        voteButtonInactive: COLORS.textMuted,
+        voteButtonContainer: {
+          borderColor: COLORS.primary,
+        },
       },
     },
   },
